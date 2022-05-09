@@ -27,3 +27,7 @@ nodemon
 My App uses data from the new york stock exchange to allow the use to search by either the name of the company or the the Symbol abbrevation of the company. for example you can search the company 3M by tying in 3M to the Search companies by name or MMM into the search companies by symbol. It will then return a list of the companies with that name or symbol.
 
 ![Screen Shot 2022-05-08 at 10 28 54 PM](https://user-images.githubusercontent.com/90795598/167335996-117afece-58b6-417e-a539-ee0a8cd82e2b.png)
+
+
+You can install this app by going to the web page: https://nyse-cs103a.herokuapp.com/ or cloning the git hub repository and then installing npm and running it on the local host port 2000!
+
