@@ -25,7 +25,7 @@ const Schedule = require('./models/Schedule')
 // *********************************************************** //
 //  Loading JSON datasets
 // *********************************************************** //
-const courses = require('./public/data/courses20-21.json')
+const courses = require('./public/data/stock.json')
 
 
 // *********************************************************** //
@@ -34,7 +34,8 @@ const courses = require('./public/data/courses20-21.json')
 
 const mongoose = require( 'mongoose' );
 //const mongodb_URI = 'mongodb://localhost:27017/cs103a_todo'
-const mongodb_URI = 'mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const mongodb_URI = 'mongodb+srv://kaysmith:Teamplayer1@cluster0.xchke.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+
 //mongodb+srv://cs103a:<password>@cluster0.kgugl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 mongoose.connect( mongodb_URI, { useNewUrlParser: true, useUnifiedTopology: true } );
@@ -181,14 +182,14 @@ app.get('/todo',
   Functions needed for the course finder routes
    ************************ */
 
-function getNum(coursenum){
+function getNum(Name){
   // separate out a coursenum 103A into 
   // a num: 103 and a suffix: A
   i=0;
-  while (i<coursenum.length && '0'<=coursenum[i] && coursenum[i]<='9'){
+  while (i<Name.length && '0'<=Name[i] && Name[i]<='9'){
     i=i+1;
   }
-  return coursenum.slice(0,i);
+  return Name.slice(0,i);
 }
 
 
@@ -238,11 +239,11 @@ app.get('/upsertDB',
   async (req,res,next) => {
     //await Course.deleteMany({})
     for (course of courses){
-      const {subject,coursenum,section,term}=course;
-      const num = getNum(coursenum);
+      const {Name,Sector,Industrials,Symbol}=course;
+      const num = getNum(Name);
       course.num=num
-      course.suffix = coursenum.slice(num.length)
-      await Course.findOneAndUpdate({subject,coursenum,section,term},course,{upsert:true})
+      course.suffix = Name.slice(num.length)
+      await Course.findOneAndUpdate({Name,Sector,Industrials,Symbol},course,{upsert:true})
     }
     const num = await Course.find({}).count();
     res.send("data uploaded: "+num)
@@ -375,7 +376,7 @@ app.use(function(err, req, res, next) {
 //  Starting up the server!
 // *********************************************************** //
 //Here we set the port to use between 1024 and 65535  (2^16-1)
-const port = "5000";
+const port = "2000";
 app.set("port", port);
 
 // and now we startup the server listening on that port
