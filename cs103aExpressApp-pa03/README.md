@@ -24,3 +24,5 @@ and start the project with
 nodemon
 ```
 
+My App uses data from the new york stock exchange to allow the use to search by either the name of the company or the the Symbol abbrevation of the company. for example you can search the company 3M by tying in 3M to the Search companies by name or MMM into the search companies by symbol. It will then return a list of the companies with that name or symbol.
+
