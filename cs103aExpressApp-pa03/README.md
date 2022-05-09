@@ -31,3 +31,8 @@ My App uses data from the new york stock exchange to allow the use to search by 
 
 You can install this app by going to the web page: https://nyse-cs103a.herokuapp.com/ or cloning the git hub repository and then installing npm and running it on the local host port 2000!
 
+
+Zoom video link: https://brandeis.zoom.us/rec/share/Sz3BgAGxbv4bEs2ry2dXx5yFAIupUy8mv6xRgONH8EYGFTw2c0n66XKSCS7d_fpG.7-VZ2ApLfhuHm2Hq?startTime=1652067854000
+
+
+
