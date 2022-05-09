@@ -1,30 +1,26 @@
 
 
     <div class="jumbotron">
-        <h1>PA03: Course Finder Fall20-Spr21 </h1>
+        <h1>PA03: New York Stock Exchange Finder </h1>
         <p></p>
     </div>
 
     <p class="p-3 m-3 border border-primary bg-light">
-        The goal of this assignment is to write an app that will let
-        students pick their courses for the year. Since we don't have 
-        the data for this year (due to workday issues), we will use the 
-        2020-2021 Academic year data. You must signup or login to see
-        the courses and create your schedule.
+ This app allows you to seach the companies apart of the new york stock exchange by name or by their symbol.
     </p>
     
     <% if (true || loggedIn) {%>  
         <form method="post" action="/courses/bySubject">
-            Show Courses by Subject: 
-              <input type="text" name="subject" 
-                     placeholder="e.g. COSI">
+            Show Companies by Name: 
+              <input type="text" name="Name" 
+                     placeholder="e.g. 3M">
             <input type="submit">
         </form>
         <br>
         <form method="post" action="/courses/byInst">
-            Show Courses by Instructor Email: 
-            <input type="text" name="email" 
-                   placeholder="e.g. tjhickey">
+            Show Companies by Symbol: 
+            <input type="text" name="Symbol" 
+                   placeholder="e.g. MMM">
             <input type="submit">
         </form>
         <br>

@@ -34,7 +34,8 @@ const courses = require('./public/data/stock.json')
 
 const mongoose = require( 'mongoose' );
 //const mongodb_URI = 'mongodb://localhost:27017/cs103a_todo'
-const mongodb_URI = 'mongodb+srv://kaysmith:Teamplayer1@cluster0.xchke.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+
+const mongodb_URI = process.env.MONGODB_URI;
 
 //mongodb+srv://cs103a:<password>@cluster0.kgugl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
@@ -239,11 +240,11 @@ app.get('/upsertDB',
   async (req,res,next) => {
     //await Course.deleteMany({})
     for (course of courses){
-      const {Name,Sector,Industrials,Symbol}=course;
-      const num = getNum(Name);
-      course.num=num
-      course.suffix = Name.slice(num.length)
-      await Course.findOneAndUpdate({Name,Sector,Industrials,Symbol},course,{upsert:true})
+      const {Name,Sector,Symbol}=course;
+      course.Name=Name
+      course.Sector=Sector
+      course.Symbol=Symbol
+      await Course.findOneAndUpdate({Name,Sector,Symbol},course,{upsert:true})
     }
     const num = await Course.find({}).count();
     res.send("data uploaded: "+num)
@@ -252,17 +253,19 @@ app.get('/upsertDB',
 
 
 app.post('/courses/bySubject',
-  // show list of courses in a given subject
+  // show courses that contains this keyword
   async (req,res,next) => {
-    const {subject} = req.body;
-    const courses = await Course.find({subject:subject,independent_study:false}).sort({term:1,num:1,section:1})
-    
-    res.locals.courses = courses
-    res.locals.times2str = times2str
+    const Name = req.body.Name;
+    const courses = 
+       await Course
+               .find({Name : Name})      
     //res.json(courses)
+    res.locals.courses = courses
     res.render('courselist')
   }
 )
+
+
 
 app.get('/courses/show/:courseId',
   // show all info about a course given its courseid
@@ -287,17 +290,18 @@ app.get('/courses/byInst/:email',
   } 
 )
 
+
 app.post('/courses/byInst',
-  // show courses taught by a faculty send from a form
+  // show courses that contains this keyword
   async (req,res,next) => {
-    const email = req.body.email+"@brandeis.edu";
+    const Name = req.body.Symbol;
     const courses = 
        await Course
-               .find({instructor:email,independent_study:false})
-               .sort({term:1,num:1,section:1})
+               .find({Name:{$regex : Symbol}})
+               
     //res.json(courses)
     res.locals.courses = courses
-    res.locals.times2str = times2str
+
     res.render('courselist')
   }
 )

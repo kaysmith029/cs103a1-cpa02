@@ -7,7 +7,6 @@ const Mixed = Schema.Types.Mixed;
 var courseSchema = Schema( {
     Name: String,
     Sector: String,
-    Industrials: String,
     Symbol: String
 
 } );
